@@ -26,7 +26,7 @@ load digit8; digitdata = [digitdata; D]; targets = [targets; repmat([0 0 0 0 0 0
 load digit9; digitdata = [digitdata; D]; targets = [targets; repmat([0 0 0 0 0 0 0 0 0 1], size(D,1), 1)];
 digitdata = digitdata/255;
 
-save('D:\Acadêmico\Codes\Deep Learning\Reducing the Dimensionality of Data with Neural Networks\Autoencoder_Code\digittraindata.mat', 'digitdata');
+save('D:\Acadêmico\Codes\Deep Learning\dlpso\digittraindata.mat', 'digitdata');
 
 totnum=size(digitdata,1);
 fprintf(1, 'Size of the training dataset= %5d \n', totnum);
@@ -60,7 +60,7 @@ load test8; digitdata = [digitdata; D]; targets = [targets; repmat([0 0 0 0 0 0 
 load test9; digitdata = [digitdata; D]; targets = [targets; repmat([0 0 0 0 0 0 0 0 0 1], size(D,1), 1)];
 digitdata = digitdata/255;
 
-save('D:\Acadêmico\Codes\Deep Learning\Reducing the Dimensionality of Data with Neural Networks\Autoencoder_Code\digittestdata.mat', 'digitdata');
+%save('D:\Acadêmico\Codes\Deep Learning\Reducing the Dimensionality of Data with Neural Networks\Autoencoder_Code\digittestdata.mat', 'digitdata');
 
 totnum=size(digitdata,1);
 fprintf(1, 'Size of the test dataset= %5d \n', totnum);
