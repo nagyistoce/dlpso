@@ -1,7 +1,6 @@
-numcases = 100;
+clear;
+load('D:\Acadêmico\Codes\Deep Learning\dlpso\digittraindata.mat', 'digitdata');
+data = digitdata;
 numdims = 784;
-numbatches = 200;
-numhid = 500; %500
-firstLayer = 1;
-
-rbm;
+numhid = 500;
+rbmpso;
