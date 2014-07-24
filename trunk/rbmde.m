@@ -1,4 +1,4 @@
-populationSize = 10;
+populationSize = 5;
 dimension = (numdims * numhid) + numdims + numhid;
 iterMax = 10;
 F = 0.5;
@@ -11,9 +11,8 @@ fitness = zeros(1, populationSize);
 
 fits = zeros(iterMax, populationSize);
 
-for iter=1:iterMax    
+for iter=1:iterMax        
     
-    fprintf('DE Iteration: %d\n', iter);
     
     for k=1:populationSize        
         particle = population(:, k);       
@@ -21,6 +20,8 @@ for iter=1:iterMax
         fitness(1, k) = err;
         fits(iter, k) = err;
     end
+    
+    fprintf('DE Iteration: %d\n', iter);
     
     fprintf('Fitness BEFORE iteration: %d\n', iter);
     disp(fits);
