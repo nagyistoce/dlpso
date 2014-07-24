@@ -1,14 +1,10 @@
 load('mnistvhclassify')
 % Initializing symmetric weights and biases. 
-%visbiases   = particle(1:numdims)'*0.0002;
-%hidbiases   = particle((numdims+1):(numdims+numhid))';
-hidbiases = hidrecbiases;
+visbiases   = particle(1:numdims)'*0.0002;
+hidbiases   = particle((numdims+1):(numdims+numhid))';
 %vishid      = vec2mat(particle((numdims+numhid+1):end),numdims)';
-%vishid = particle((numdims+numhid+1):end);
-
-%This will "copy" most of the vec2mat behavior
-% c is the original vector, matrix, nc is the number of columns:
-%vishid = reshape([vishid(:) ; zeros(rem(numdims - rem(numel(vishid),numdims),numdims),1)],numdims,[]);
+vishid = particle((numdims+numhid+1):end);
+vishid = reshape([vishid(:) ; zeros(rem(numdims - rem(numel(vishid),numdims),numdims),1)],numdims,[]);
 
 numcases = size(data, 1);
 

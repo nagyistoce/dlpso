@@ -36,11 +36,11 @@ makebatches;
 
 
 fprintf(1,'Pretraining Layer 1 with RBM: %d-%d \n',numdims,numhid);
-%restart=1;
+restart=1;
 %firstLayer = 1;
-load('D:\Acadêmico\Codes\Deep Learning\dlpso\digittraindata.mat', 'digitdata');
-data = digitdata;
-rbmpso;
+%load('D:\Acadêmico\Codes\Deep Learning\dlpso\digittraindata.mat', 'digitdata');
+%data = digitdata;
+psoAfterRbm;
 hidrecbiases=hidbiases; 
 save mnistvhclassify vishid hidrecbiases visbiases;
 
