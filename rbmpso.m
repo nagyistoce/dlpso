@@ -67,32 +67,32 @@ for iter=1:iterMax %each iteration
             poshidprobsGbest = poshidprobs;
         end
     end    
-%     for i=1:swarmSize 
-%         for j=1:dimension %each dimension
-%             part1 = c1 * round(rand) * (lbest(j, i) - particle(j));
-%             part2 = c2 * round(rand) * (gbest(j) - particle(j));
-%             v(j, i) = w * v(j, i) + part1 + part2;
-%             if v(j, i) > vmax
-%                 v(j, i) = 1;
-%             elseif v(j, i) < vmin
-%                 v(j, i) = -1;                
-%             end
-%             swarm(j, i) = particle(j) + v(j, i);
-%         end 
-%     end
-    for i=1:swarmSize        
-        part1 = c1 * round(rand) * (lbest(:, i) - particle);
-        part2 = c2 * round(rand) * (gbest - particle);
-        v(:, i) = w * v(:, i) + part1 + part2;
-        for j=1:dimension 
+    for i=1:swarmSize 
+        for j=1:dimension %each dimension
+            part1 = c1 * round(rand) * (lbest(j, i) - particle(j));
+            part2 = c2 * round(rand) * (gbest(j) - particle(j));
+            v(j, i) = w * v(j, i) + part1 + part2;
             if v(j, i) > vmax
                 v(j, i) = 1;
             elseif v(j, i) < vmin
                 v(j, i) = -1;                
             end
-        end
-        swarm(:, i) = particle + v(:, i);
+            swarm(j, i) = particle(j) + v(j, i);
+        end 
     end
+%     for i=1:swarmSize        
+%         part1 = c1 * round(rand) * (lbest(:, i) - particle);
+%         part2 = c2 * round(rand) * (gbest - particle);
+%         v(:, i) = w * v(:, i) + part1 + part2;
+%         for j=1:dimension 
+%             if v(j, i) > vmax
+%                 v(j, i) = 1;
+%             elseif v(j, i) < vmin
+%                 v(j, i) = -1;                
+%             end
+%         end
+%         swarm(:, i) = particle + v(:, i);
+%     end
     w = w - 0.5 / iterMax; %w decreases linearly
     fprintf('Fitness GBEST: %f\n', fitnessGbest);
     disp(fits);

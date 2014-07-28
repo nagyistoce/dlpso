@@ -1,4 +1,4 @@
-populationSize = 5;
+populationSize = 8;
 dimension = (numdims * numhid) + numdims + numhid;
 iterMax = 10;
 F = 0.5;
@@ -8,6 +8,7 @@ population = 0.1*randn(dimension, populationSize);
 xoff = zeros(dimension, populationSize);
 replacementIndexes = zeros(1, populationSize);
 fitness = zeros(1, populationSize);
+fitnessOff = zeros(1, populationSize);
 
 fits = zeros(iterMax, populationSize);
 
@@ -25,6 +26,8 @@ for iter=1:iterMax
     
     fprintf('Fitness BEFORE iteration: %d\n', iter);
     disp(fits);
+    
+    replacementIndexes = zeros(1, populationSize);
     
     for k=1:populationSize
         randomIndexes = zeros(1, 3);
@@ -52,9 +55,9 @@ for iter=1:iterMax
         
         particle = xoff(:, k);       
         rbm_aux;
-        fitnessXoff = err;       
+        fitnessOff(1, k) = err;       
         
-        if fitnessXoff < fitness(1, k);
+        if fitnessOff(1, k) < fitness(1, k);
             replacementIndexes(1, k) = 1;
         end
     end
