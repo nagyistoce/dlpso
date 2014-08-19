@@ -1,31 +1,40 @@
-populationSize = 8;
+populationSize = 50;
 dimension = (numdims * numhid) + numdims + numhid;
-iterMax = 10;
+iterMax = 30;
 F = 0.5;
 Cr = 0.9;
 
 population = 0.1*randn(dimension, populationSize);
+population(:, 1) = [visbiases hidrecbiases reshape(vishid,numdims*numhid,1)'];
+for i=1+1:populationSize
+   population(:, i) = [visbiases+0.01*randn(1, numdims) hidrecbiases+0.01*randn(1, numhid) reshape(vishid,numdims*numhid,1)'+0.01*randn(1, numdims*numhid)]; 
+end
 xoff = zeros(dimension, populationSize);
 replacementIndexes = zeros(1, populationSize);
 fitness = zeros(1, populationSize);
 fitnessOff = zeros(1, populationSize);
 
-fits = zeros(iterMax, populationSize);
+fits = zeros(iterMax+1, populationSize);
+
+for k=1:populationSize        
+    particle = population(:, k);       
+    rbm_aux;
+    fitness(1, k) = err;
+    fits(1, k) = err;
+end
+
+disp(fits(1,1:10));
+disp(fits(1,11:20));
+disp(fits(1,21:30));
+disp(fits(1,31:40));
+disp(fits(1,41:50));
 
 for iter=1:iterMax        
-    
-    
-    for k=1:populationSize        
-        particle = population(:, k);       
-        rbm_aux;
-        fitness(1, k) = err;
-        fits(iter, k) = err;
-    end
-    
+        
     fprintf('DE Iteration: %d\n', iter);
     
-    fprintf('Fitness BEFORE iteration: %d\n', iter);
-    disp(fits);
+    %fprintf('Fitness BEFORE iteration: %d\n', iter);
+    %disp(fits);
     
     replacementIndexes = zeros(1, populationSize);
     
@@ -57,7 +66,7 @@ for iter=1:iterMax
         rbm_aux;
         fitnessOff(1, k) = err;       
         
-        if fitnessOff(1, k) < fitness(1, k);
+        if fitnessOff(1, k) < fits(iter, k);
             replacementIndexes(1, k) = 1;
         end
     end
@@ -65,7 +74,17 @@ for iter=1:iterMax
     for k=1:populationSize
         if replacementIndexes(1, k) == 1
             population(:, k) = xoff(:, k);
+            fits(iter+1, k) = fitnessOff(1, k);                       
+        else
+            fits(iter+1, k) = fits(iter, k);
         end
-    end
+    end    
+    
+    disp(fits(iter,1:10));
+    disp(fits(iter,11:20));
+    disp(fits(iter,21:30));
+    disp(fits(iter,31:40));
+    disp(fits(iter,41:50));
+    
     
 end

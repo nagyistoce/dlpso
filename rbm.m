@@ -39,6 +39,13 @@ if restart ==1,
   vishid     = 0.1*randn(numdims, numhid);
   hidbiases  = zeros(1,numhid);
   visbiases  = zeros(1,numdims);
+  
+%   vishidRBM = vishid;
+%   hidbiasesRBM = hidbiases;
+%   visbiasesRBM = visbiases;
+%   save('D:\Acadêmico\Codes\Deep Learning\dlpso\vishidRBM.mat', 'vishidRBM');
+%   save('D:\Acadêmico\Codes\Deep Learning\dlpso\hidbiasesRBM.mat', 'hidbiasesRBM');
+%   save('D:\Acadêmico\Codes\Deep Learning\dlpso\visbiasesRBM.mat', 'visbiasesRBM');
 
   poshidprobs = zeros(numcases,numhid);
   neghidprobs = zeros(numcases,numhid);
@@ -53,6 +60,7 @@ end
 for epoch = epoch:maxepoch,
  fprintf(1,'epoch %d\r',epoch); 
  errsum=0;
+ errList = zeros(1, numbatches);
  for batch = 1:numbatches,
  %fprintf(1,'epoch %d batch %d\r',epoch,batch); 
 
@@ -76,6 +84,7 @@ for epoch = epoch:maxepoch,
 
 %%%%%%%%% END OF NEGATIVE PHASE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   err= sum(sum( (data-negdata).^2 ));
+  errList(1, batch) = err;
   errsum = err + errsum;
 
    if epoch>5,
@@ -93,6 +102,14 @@ for epoch = epoch:maxepoch,
     vishid = vishid + vishidinc;
     visbiases = visbiases + visbiasinc;
     hidbiases = hidbiases + hidbiasinc;
+    
+%     vishid2 = vishid;
+%     hidbiases2 = hidbiases;
+%     visbiases2 = visbiases;
+%     save('D:\Acadêmico\Codes\Deep Learning\dlpso\vishid2.mat', 'vishid2');
+%     save('D:\Acadêmico\Codes\Deep Learning\dlpso\hidrecbiases2.mat', 'hidbiases2');
+%     save('D:\Acadêmico\Codes\Deep Learning\dlpso\visbiases2.mat', 'visbiases2');
+
 
 %%%%%%%%%%%%%%%% END OF UPDATES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
