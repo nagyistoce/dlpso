@@ -20,51 +20,40 @@
 clear all
 close all
 
-maxepoch=5; %50
+maxepoch=2; %50
 numhid=500; numpen=500; numpen2=2000; 
 
 fprintf(1,'Converting Raw files into Matlab format \n');
-converter; 
+%converter; 
 
 fprintf(1,'Pretraining a deep autoencoder. \n');
 fprintf(1,'The Science paper used 50 epochs. This uses %3i \n', maxepoch);
 
-makebatches;
+%makebatches;
+load('D:\Acadêmico\Codes\Deep Learning\dlpso\batchdata.mat', 'batchdata');
 [numcases numdims numbatches]=size(batchdata);
 
 %save('D:\Acadêmico\Codes\Deep Learning\Reducing the Dimensionality of Data with Neural Networks\Autoencoder_Code\batchdata.mat', 'batchdata');
 
 
 fprintf(1,'Pretraining Layer 1 with RBM: %d-%d \n',numdims,numhid);
-restart=1;
-%firstLayer = 1;
-%load('D:\Acadêmico\Codes\Deep Learning\dlpso\digittraindata.mat', 'digitdata');
-%data = digitdata;
-psoAfterRbm;
+rbmbatchpso2;
 hidrecbiases=hidbiases; 
 save mnistvhclassify vishid hidrecbiases visbiases;
 
 fprintf(1,'\nPretraining Layer 2 with RBM: %d-%d \n',numhid,numpen);
-%batchdata=batchposhidprobs;
-data = poshidprobsGbest;
-%numhid=numpen;
+batchdata = batchposhidprobs;
 numdims = numhid;
 numhid = numpen;
-%restart=1;
-firstLayer = 0;
-rbmpso;
+rbmbatchpso2;
 hidpen=vishid; penrecbiases=hidbiases; hidgenbiases=visbiases;
 save mnisthpclassify hidpen penrecbiases hidgenbiases;
 
 fprintf(1,'\nPretraining Layer 3 with RBM: %d-%d \n',numpen,numpen2);
-%batchdata=batchposhidprobs;
-data = poshidprobsGbest;
-%numhid=numpen;
+batchdata = batchposhidprobs;
 numdims = numpen;
 numhid = numpen2;
-%restart=1;
-firstLayer = 0;
-rbmpso;
+rbmbatchpso2;
 hidpen2=vishid; penrecbiases2=hidbiases; hidgenbiases2=visbiases;
 save mnisthp2classify hidpen2 penrecbiases2 hidgenbiases2;
 

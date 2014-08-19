@@ -1,5 +1,5 @@
 %pso parameters
-swarmSize = 2; %swarm size 10 
+swarmSize = 5; %swarm size 10 
 dimension = (numdims * numhid) + numdims + numhid;
 xmax = 1;
 xmin = -1;
@@ -8,7 +8,7 @@ vmin = -0.1;
 w = 0.9; %inertia weight (momentum term)
 c1 = 2.05;
 c2 = 2.05; %individual and global acceleration coefficients
-iterMax = 15; %10
+iterMax = 20; %10
 maxCountStopCriteria = 100;
 
 disp('PSO initialiazation');
@@ -25,13 +25,20 @@ fprintf('Swarm size: %d\n', swarmSize);
 %    end    
 %    %lbest(:, i) = swarm(:, i);
 % end
+%swarm = randn(dimension, swarmSize);
 swarm = 0.1*randn(dimension, swarmSize);
-%swarm = normrnd(0,0.1,dimension,swarmSize);
-%swarm(:, 1) = [visbiases hidrecbiases reshape(vishid,numdims*numhid,1)'];
+%swarm = normrnd(0.03,0.2,dimension,swarmSize);
+%swarm(:, 1) = [visbiasesBatchPSO hidbiasesBatchPSO reshape(vishidBatchPSO,numdims*numhid,1)'];
+swarm(:, 1) = [visbiases hidrecbiases reshape(vishid,numdims*numhid,1)'];
+swarm(:, 2) = [visbiases+0.1*randn(1, numdims) hidrecbiases+0.1*randn(1, numhid) reshape(vishid,numdims*numhid,1)'+0.1*randn(1, numdims*numhid)];
+swarm(:, 3) = [visbiases+0.1*randn(1, numdims) hidrecbiases+0.1*randn(1, numhid) reshape(vishid,numdims*numhid,1)'+0.1*randn(1, numdims*numhid)];
+swarm(:, 4) = [visbiases+0.1*randn(1, numdims) hidrecbiases+0.1*randn(1, numhid) reshape(vishid,numdims*numhid,1)'+0.1*randn(1, numdims*numhid)];
+swarm(:, 5) = [visbiases+0.1*randn(1, numdims) hidrecbiases+0.1*randn(1, numhid) reshape(vishid,numdims*numhid,1)'+0.1*randn(1, numdims*numhid)];
 %lbest = 0.1*randn(dimension, swarmSize);
 lbest = swarm;
 %gbest = 0.1*ones(dimension);
-v = 0.01*randn(dimension, swarmSize);
+v = 0.1*randn(dimension, swarmSize);
+%v = normrnd(0.03,0.2,dimension,swarmSize);
 
 
 fitnessLbest = 1000000000000 * ones(1,swarmSize);

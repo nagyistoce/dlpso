@@ -20,16 +20,17 @@
 clear all
 close all
 
-maxepoch=5; %50
+maxepoch=50; %50
 numhid=500; numpen=500; numpen2=2000; 
 
 fprintf(1,'Converting Raw files into Matlab format \n');
-converter; 
+%converter; 
 
 fprintf(1,'Pretraining a deep autoencoder. \n');
 fprintf(1,'The Science paper used 50 epochs. This uses %3i \n', maxepoch);
 
-makebatches;
+%makebatches;
+load('D:\Acadêmico\Codes\Deep Learning\dlpso\batchdata.mat', 'batchdata');
 [numcases numdims numbatches]=size(batchdata);
 
 %save('D:\Acadêmico\Codes\Deep Learning\Reducing the Dimensionality of Data with Neural Networks\Autoencoder_Code\batchdata.mat', 'batchdata');
