@@ -113,6 +113,6 @@ for epoch = epoch:maxepoch,
 
 %%%%%%%%%%%%%%%% END OF UPDATES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-  end
+ end  
   fprintf(1, 'epoch %4i error %6.1f  \n', epoch, errsum); 
 end;
